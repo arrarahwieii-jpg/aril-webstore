@@ -9,29 +9,15 @@
 </head>
 <body>
 
-    <!-- AUDIO UNLOCK OVERLAY -->
-    <div id="audio-unlock" class="audio-overlay" onclick="unlockAudio()">
-        <div class="audio-content">
-            <h2>Klik Untuk Masuk</h2>
-            <p>Mengaktifkan visual & audio</p>
-        </div>
-    </div>
-
     <!-- ================= HALAMAN 1: SPLASH ================= -->
     <div id="page-splash" class="page active">
-        <video muted autoplay loop playsinline class="bg-video" id="vid-splash">
-            <source src="ssstik.io_1794179351725.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <button class="btn-top-left hidden" id="btn-exit" onclick="exitWeb()">✕ Keluar</button>
-        <div class="content-splash">
-            <h1 class="title-splash hidden" id="title-splash">Welcome To My<br>Portfolio Website</h1>
-            <div class="loading-container" id="loading-container">
-                <div class="loading-bar-bg"><div class="loading-bar-fill" id="loading-fill"></div></div>
-                <span class="loading-text" id="loading-text">Loading 0%</span>
-            </div>
+        <!-- Gambar Poster -->
+        <img src="file_000000005bd882118734e95b881d13ec.png" class="splash-poster" alt="Poster">
+        
+        <!-- Tombol Klik Transparan Full Screen -->
+        <div id="splash-trigger" class="splash-trigger">
+            <span class="splash-text">KLIK UNTUK MASUK<br>KE WEBSITE</span>
         </div>
-        <button class="btn-nav btn-next-splash hidden" id="btn-next-splash" onclick="nextPage('page-home')">Selanjutnya <span class="arrow">➔</span></button>
     </div>
 
     <!-- ================= HALAMAN 2: HOMEPAGE ================= -->
@@ -40,82 +26,82 @@
             <source src="ssstik.io_1794179499112.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
-        <button class="btn-top-left" onclick="nextPage('page-splash')">← Kembali</button>
+        
+        <div id="maintenance-screen" class="closed-overlay hidden">
+            <audio id="audio-maintenance" loop>
+                <source src="ssstik.io_1794233621382.mp3" type="audio/mpeg">
+            </audio>
+            <button class="btn-return-absolute" onclick="nextPage('page-splash')">Return</button>
+        </div>
 
-        <div class="content-home">
+        <div id="home-content" class="content-home">
             <h1 class="logo-aril">ARIL <span class="logo-store">STORE</span></h1>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            
+            <div class="operational-hours">
+                <p>🕒 Jam Operasional:</p>
+                <p style="color:#4da6ff;">Senin - Jumat: 06:00 - 13:25 | 18:00 - 21:40</p>
+                <p style="color:#00ff00;">Sabtu - Minggu: 24 Jam Nonstop</p>
+            </div>
+
+            <div class="home-buttons">
                 <button class="btn-main" onclick="checkAuthAndGoCatalog()">LIHAT KATALOG</button>
                 <button class="btn-main btn-admin-login" onclick="openAdminLogin()">ADMIN LOGIN</button>
             </div>
+            
+            <button class="btn-main" style="margin-top: 10px; border-color: #ffcc00; color: #ffcc00; font-size: 0.9rem; padding: 10px 20px;" onclick="openPartnerLogin()">LOGIN PARTNER</button>
         </div>
         
-        <!-- MEMBER LOGIN PANEL -->
         <div id="login-panel" class="login-panel hidden">
             <h3>Member Login</h3>
-            <p style="font-size:0.8rem; color:#aaa; margin-bottom: 15px;">Silakan login untuk membeli produk.</p>
-            <button class="btn-oauth btn-google" onclick="loginSimulasi('Google')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G" width="18"> Login with Google
-            </button>
-            <button class="btn-oauth btn-facebook" onclick="loginSimulasi('Facebook')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="F" width="18"> Login with Facebook
-            </button>
-            <button class="btn-oauth btn-apple" onclick="loginSimulasi('Apple')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="A" width="18" style="filter: invert(1);"> Login with Apple
-            </button>
+            <p class="login-desc">Silakan login untuk membeli produk.</p>
+            <button class="btn-oauth btn-google" onclick="loginSimulasi('Google')">Login Google</button>
+            <button class="btn-oauth btn-facebook" onclick="loginSimulasi('Facebook')">Login Facebook</button>
+            <button class="btn-oauth btn-apple" onclick="loginSimulasi('Apple')">Login Apple</button>
             <button class="btn-oauth btn-guest" onclick="loginAsGuest()">Masuk Sebagai Tamu</button>
         </div>
     </div>
 
-    <!-- GANTI BAGIAN HALAMAN 3 DI index.html DENGAN INI -->
+    <!-- ================= HALAMAN 3: KATALOG ================= -->
     <div id="page-catalog" class="page">
         <video loop playsinline class="bg-video" id="vid-catalog">
             <source src="ssstik.io_1794182416878.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
         
-        <!-- Tombol Kembali & Keranjang -->
-        <button class="btn-top-left" style="top: 15px;" onclick="nextPage('page-home')">← Kembali</button>
-        <button class="btn-top-left btn-cart" style="top: 75px;" onclick="openCartPanel()">
-            <img src="1001197320-removebg-preview.png" alt="Keranjang" class="cart-icon-img">
-            Keranjang
-        </button>
+        <button class="btn-top-left" onclick="nextPage('page-home')">← Kembali</button>
+        <button class="btn-top-right" onclick="openCartPanel()"><img src="1001197320-removebg-preview.png" alt="Keranjang" class="cart-icon-img"> Keranjang</button>
 
-        <!-- KONTAK WA & TG MELAYANG DI KIRI (Area Lingkaran Hijau) -->
-        <div class="contact-fixed">
-            <p>Butuh Bantuan?</p>
-            <a href="https://wa.me/6285242725765" target="_blank" class="btn-contact-fixed btn-wa-fixed">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" width="20"> WhatsApp
-            </a>
-            <a href="https://t.me/usernamekamu" target="_blank" class="btn-contact-fixed btn-tg-fixed">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="TG" width="20"> Telegram
-            </a>
-        </div>
-
-        <!-- Header Tengah -->
-        <div class="catalog-header-centered">
-            <div class="logo-nav-center">ARIL <span>STORE</span></div>
-            <nav class="category-nav-center">
-                <button class="cat-btn active" onclick="filterCategory('all', this)">All Produk</button>
-                <button class="cat-btn" onclick="filterCategory('ff', this)">Free Fire</button>
-                <button class="cat-btn" onclick="filterCategory('8ball', this)">8Ball Pool</button>
-            </nav>
-            <div class="user-nav-center">
-                <span id="user-display-name">Guest</span>
-                <span id="user-badge" class="badge hidden">ADMIN</span>
-                <button class="btn-logout" onclick="logout()">Logout</button>
+        <div class="catalog-wrapper" id="catalog-content">
+            <div class="catalog-header">
+                <div class="logo-nav">ARIL <span>STORE</span></div>
+                <nav class="category-nav">
+                    <button class="cat-btn active" onclick="filterCategory('all', this)">All Produk</button>
+                    <button class="cat-btn" onclick="filterCategory('ff', this)">Free Fire</button>
+                    <button class="cat-btn" onclick="filterCategory('8ball', this)">8Ball Pool</button>
+                </nav>
+                <div class="user-nav">
+                    <span id="user-display-name">Guest</span>
+                    <span id="user-badge" class="badge hidden">ADMIN</span>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+                <button id="btn-admin-setting" class="btn-setting-admin hidden" onclick="bukaSettingAdmin()">⚙️ Buka Setting Web</button>
             </div>
+            <main class="catalog-main">
+                <div id="product-grid" class="product-grid"></div>
+            </main>
         </div>
 
-        <main class="catalog-main-centered">
-            <div id="product-grid" class="product-grid"></div>
-        </main>
+        <div class="contact-fixed">
+            <p>Butuh Bantuan?<br><span>Hubungi kami 👇</span></p>
+            <a href="https://wa.me/6285242725765" target="_blank" class="btn-contact btn-wa">WhatsApp</a>
+            <a href="https://t.me/usernamekamu" target="_blank" class="btn-contact btn-tg">Telegram</a>
+        </div>
     </div>
 
-    <!-- ================= HALAMAN 4: DIAMOND ALL GAME ================= -->
+    <!-- ================= HALAMAN 4: DIAMOND ================= -->
     <div id="page-diamond" class="page">
         <div class="overlay"></div>
-        <button class="btn-top-left" onclick="openCartPanel()" style="z-index: 10;">← Kembali</button>
+        <button class="btn-top-left" onclick="openCartPanel()">← Kembali</button>
         <div class="poster-bg" style="background-image: url('file_00000000bf408211aab2db8eded566a9.png');"></div>
         <div class="interactive-layer">
             <div class="game-logo-grid-poster">
@@ -136,81 +122,103 @@
         </div>
     </div>
 
-    <!-- ================= HALAMAN 5: ARIL BOOKSTORE ================= -->
+    <!-- ================= HALAMAN 5: BUKU ================= -->
     <div id="page-books" class="page">
         <div class="overlay"></div>
-        <button class="btn-top-left" onclick="openCartPanel()" style="z-index: 10;">← Kembali</button>
+        <button class="btn-top-left" onclick="openCartPanel()">← Kembali</button>
         <div class="poster-bg" style="background-image: url('file_00000000e6e48211899be42716c3539b.png');"></div>
         <div class="interactive-layer" style="justify-content: flex-end; padding-bottom: 10%;">
             <button class="btn-poster-action" onclick="goToBookWeb()">🛒 Pesan Sekarang!</button>
         </div>
     </div>
 
-    <!-- ================= MODAL KERANJANG (POSTER BARU) ================= -->
+    <!-- ================= HALAMAN 6: ADMIN PANEL ================= -->
+    <div id="page-admin-panel" class="page">
+        <video muted autoplay loop playsinline class="bg-video" id="vid-admin">
+            <source src="ssstik.io_1794210637490.mp4" type="video/mp4">
+        </video>
+        <div class="overlay" style="background: rgba(0,0,0,0.4); z-index: 1;"></div>
+        
+        <div class="admin-ui-layer">
+            <div class="dev-header">
+                <div class="dev-menu-info">
+                    <span class="dev-icon">📌</span>
+                    <div>
+                        <p class="dev-title">Menu Informasi</p>
+                        <p class="dev-subtitle">About Dev • Report Bug • Saluran WhatsApp</p>
+                    </div>
+                </div>
+                <div class="dev-audio-ctrl">
+                    <span class="dev-icon-chart">📊</span>
+                    <button class="dev-btn-icon">⏪</button>
+                    <button class="dev-btn-icon" id="btn-pause-admin" onclick="toggleAdminVideo()">▶️</button>
+                    <button class="dev-btn-icon">⏩</button>
+                    <button class="dev-btn-icon">≡</button>
+                </div>
+            </div>
+
+            <div class="dev-hero">
+                <img src="https://i.pinimg.com/originals/c2/9f/84/c29f8416c533ddbf8f66f74b3f1d5a0b.jpg" alt="">
+                <h1 class="dev-hero-title">All Tools Aril</h1>
+                <p class="dev-hero-subtitle">by Aril</p>
+            </div>
+
+            <div class="dev-info">
+                <div class="dev-user-icon">👤</div>
+                <div class="dev-stats">
+                    <div class="dev-stat-row">
+                        <span class="dot red"></span> NEGARA <span class="flag">🇮🇩</span> Indonesia
+                        <span class="dot"></span> DEVICE <span style="color:#fff;">Android</span>
+                    </div>
+                    <div class="dev-stat-row">
+                        <span class="dot red"></span> BROWSER <span style="color:#fff;">Chrome</span>
+                        <span class="dot green"></span> STATUS <span style="color:#00ff00;">Online</span>
+                    </div>
+                    <div class="dev-stat-row" style="margin-top: 10px;">
+                        <span style="color:#00ff00;" id="battery-level">🔋 --%</span>
+                        <span class="badge-vvip">VVIP</span>
+                    </div>
+                </div>
+                <button class="btn-volume-small" onclick="toggleVolumeSlider()" title="Volume Video">🔊</button>
+                <div id="volume-slider-container" class="volume-slider-container hidden">
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1" oninput="changeVolume(this.value)">
+                </div>
+                <button class="btn-settings-small" onclick="openSettingsPopUp()" title="Pengaturan">⚙️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODALS ================= -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 class="modal-title">⚙️ Pengaturan Web</h2>
+            <button class="btn-main btn-modal-red" onclick="toggleStoreStatus(true)">🔒 TUTUP WEB</button>
+            <button class="btn-main btn-modal-green" onclick="toggleStoreStatus(false)">🔓 BUKA WEB</button>
+            <button class="btn-main btn-modal-blue" onclick="checkOnlineMembers()">🟢 LIHAT MEMBER ONLINE</button>
+            <button class="btn-close-modal" onclick="closeSettingsPopUp()">Tutup</button>
+        </div>
+    </div>
+
     <div id="cart-modal" class="modal hidden">
         <div class="cart-modal-content" style="background-image: url('file_00000000c6fc8211b6777033ce387706.png');">
-            <!-- Overlay transparan di atas poster -->
             <div class="cart-modal-overlay"></div>
-            
-            <!-- Tombol Pilihan di Bawah -->
             <div class="cart-actions">
                 <button class="btn-cart-action btn-diamond" onclick="closeCartModal(); nextPage('page-diamond');">Top Up Diamond</button>
                 <button class="btn-cart-action btn-book" onclick="closeCartModal(); nextPage('page-books');">Beli Buku</button>
             </div>
-            
-            <!-- Tombol Close Silang -->
             <button class="btn-close-cart" onclick="closeCartModal()">✕</button>
         </div>
     </div>
 
-    <!-- ================= MODAL PEMBAYARAN ================= -->
-    <div id="payment-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2 id="modal-title">Pilih Metode Pembayaran</h2>
-            <div class="payment-methods">
-                <div class="payment-group">
-                    <h4>QRIS Otomatis</h4>
-                    <button class="btn-qris" onclick="startPayment('QRIS')">QRIS (GoPay)</button>
-                </div>
-                <div class="payment-group">
-                    <h4>M-Banking</h4>
-                    <button class="btn-bank" onclick="startPayment('BSI')">BSI (Bank Syariah Indonesia)</button>
-                </div>
-            </div>
-            <div class="support-section">
-                <p>Ada masalah Butuh Bantuan!</p>
-                <div class="support-btns">
-                    <a href="https://wa.me/6285242725765" target="_blank" class="btn-contact-fixed btn-wa-fixed">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" width="20"> WhatsApp
-</a>
-</a>
-                    <a href="https://t.me/usernamekamu" target="_blank" class="btn-support btn-tg">Telegram</a>
-                </div>
-            </div>
-            <button class="btn-close-modal" onclick="closeModal()">Tutup</button>
-        </div>
-    </div>
-
-    <!-- ADMIN PANEL -->
-    <div class="admin-panel hidden" id="admin-panel">
-        <h3>Admin Control Panel</h3>
-        <ul id="admin-user-list" class="admin-list">
-            <li><span>Status Server:</span> <span style="color:#00ff00;">Online</span></li>
-            <li><span>Total Member:</span> <span>1,240</span></li>
-            <li><span>Pendapatan Hari Ini:</span> <span style="color:#4da6ff;">Rp 3.500.000</span></li>
-        </ul>
-        <button class="btn-close-admin" onclick="toggleAdminPanel()">Tutup</button>
-    </div>
-
     <!-- ================= AI WIDGET ================= -->
-    <button class="ai-fab-top" id="ai-fab" onclick="toggleAI()">
-        <img src="file_0000000032808211a1c3118995e35fc7.png" alt="AI">
+    <button class="ai-fab-top" id="ai-fab" onpointerdown="startDragAI(event)">
+        <img src="file_0000000032808211a1c3118995e35fc7.png" alt="AI" draggable="false">
     </button>
 
     <div class="ai-widget hidden" id="ai-widget">
         <div class="ai-header">
             <span>ARIL AI Support</span>
-            <button onclick="toggleAI()" style="background:none; border:none; color:white; cursor:pointer;">✕</button>
+            <button onclick="toggleAI()" class="btn-close-ai">✕</button>
         </div>
         <div class="ai-chat" id="ai-chat">
             <div class="ai-msg ai-bot">Halo! Saya asisten AI ARIL STORE. Ada yang bisa dibantu?</div>
